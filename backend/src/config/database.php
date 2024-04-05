@@ -3,7 +3,7 @@ class Database
 {
     // database credentials
     private $host = "localhost";
-    private $db_name = "CRMS";
+    private $db_name = "carrentalmanagementsys";
     private $username = "root";
     private $password = "";
     public $conn;
