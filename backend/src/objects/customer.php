@@ -106,6 +106,47 @@ class Customer
         }
         return false;
     }
+
+    // retrieve a single customer based on their customer id
+    function getCustomer()
+    {
+        // query to read single record
+        $query = "SELECT * FROM " . $this->tableName . "                
+            WHERE
+                CID = ?
+            LIMIT
+                0,1";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->CID);
+
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            // set values to object properties
+            $this->CID = $row['CID'];
+            $this->Firstname = $row['Firstname'];
+            $this->Lastname = $row['Lastname'];
+            $this->Address = $row['Address'];
+            $this->Phone_Number = $row['Phone_Number'];
+            $this->Driver_License_Number = $row['Driver_License_Number'];
+            $this->Province_Of_Issue = $row['Province_Of_Issue'];
+            $this->License_Expiration_Date = $row['License_Expiration_Date'];
+            $this->Card_Number = $row['Card_Number'];
+            $this->Billing_Address = $row['Billing_Address'];
+            $this->Card_Expiration_Date = $row['Card_Expiration_Date'];
+            $this->Vehicle_Make = $row['Vehicle_Make'];
+            $this->Rental_Duration = $row['Rental_Duration'];
+            $this->Pick_Up_Location = $row['Pick_Up_Location'];
+            $this->Drop_Off_Location = $row['Drop_Off_Location'];
+        }
+    }
 }
 
 // ====================================

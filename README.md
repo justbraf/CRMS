@@ -14,7 +14,7 @@
 - Add a new customer
     - POST Method
     - http://localhost/api/customers/addNew.php
-    - Required fields with exact spelling
+    - Required POST fields with exact spelling
         - Firstname
         - Lastname
         - Address
@@ -26,6 +26,7 @@
         - Card_Number
         - Billing_Address
         - Card_Expiration_Date
-- ~~Get a specific customer~~
-    - ~~GET Method~~
-    - ~~http://localhost/api/customers/getCustomer?id=12345.php~~
+- Get a specific customer
+    - GET Method
+    - one parameter: id
+    - http://localhost/api/customers/getCustomer.php?id=12345
