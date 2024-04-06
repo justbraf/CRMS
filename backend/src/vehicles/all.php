@@ -20,7 +20,6 @@ if ($num > 0) {
     $vehicles_arr = array();
     $vehicles_arr["records"] = array();
 
-    // fetch() is faster than fetchAll()
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
 
@@ -38,12 +37,10 @@ if ($num > 0) {
 
     // set response code - 200 OK
     http_response_code(200);
-    // show vehicles data in json format
     echo json_encode($vehicles_arr);
 } else {
     // set response code - 404 Not found
     http_response_code(404);
-    // tell the user no vehicles found
     echo json_encode(
         array("message" => "No vehicles found.")
     );

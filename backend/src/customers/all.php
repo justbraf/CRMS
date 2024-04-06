@@ -12,24 +12,34 @@ $db = $database->getConnection();
 $customer = new Customer($db);
 
 // query customers
-$stmt = $customer->read();
+$stmt = $customer->getAll();
 $num = $stmt->rowCount();
 
-// check if more than 0 record found
+// check if more than 0 records found
 if ($num > 0) {
     $customers_arr = array();
     $customers_arr["records"] = array();
 
-    // fetch() is faster than fetchAll()
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
 
         $customerSingle = array(
-            "firstName" => $firstName,
-            "lastName" => $lastName,
-            "address" => html_entity_decode($address),
-            "emailAddress" => $emailAddress,
-            "phoneNumber" => $phoneNumber
+            "CID" => $CID,
+            "Firstname" => $Firstname,
+            "Lastname" => $Lastname,
+            "Address" => html_entity_decode($Address),
+            "Email_Address" => $Email_Address,
+            "Phone_Number" => $Phone_Number,
+            "Driver_License_Number" => $Driver_License_Number,
+            "Province_Of_Issue" => $Province_Of_Issue,
+            "License_Expiration_Date" => $License_Expiration_Date,
+            "Card_Number" => $Card_Number,
+            "Billing_Address" => $Billing_Address,
+            "Card_Expiration_Date" => $Card_Expiration_Date,
+            "Vehicle_Make" => $Vehicle_Make,
+            "Rental_Duration" => $Rental_Duration,
+            "Pick_Up_Location" => $Pick_Up_Location,
+            "Drop_Off_Location" => $Drop_Off_Location
         );
 
         array_push($customers_arr["records"], $customerSingle);
@@ -37,12 +47,10 @@ if ($num > 0) {
 
     // set response code - 200 OK
     http_response_code(200);
-    // show customers data in json format
     echo json_encode($customers_arr);
 } else {
     // set response code - 404 Not found
     http_response_code(404);
-    // tell the user no customers found
     echo json_encode(
         array("message" => "No customers found.")
     );
