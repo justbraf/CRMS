@@ -30,6 +30,7 @@ if ($customer->Firstname != null) {
         "Firstname" => $customer->Firstname,
         "Lastname" => $customer->Lastname,
         "Address" => $customer->Address,
+        "Email_Address" => $customer->Email_Address,
         "Phone_Number" => $customer->Phone_Number,
         "Driver_License_Number" => $customer->Driver_License_Number,
         "Province_Of_Issue" => $customer->Province_Of_Issue,

@@ -123,7 +123,7 @@ CREATE TABLE `vehicles` (
   `Model` varchar(25) NOT NULL,
   `VID` varchar(17) NOT NULL,
   `Color` varchar(15) NOT NULL,
-  `LicensePlate` varchar(10) NOT NULL,
+  `License_Plate` varchar(10) NOT NULL,
   `Odometer_Reading` int(7) NOT NULL,
   `Availability` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

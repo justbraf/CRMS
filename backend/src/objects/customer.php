@@ -45,7 +45,17 @@ class Customer
     {
         $query = "INSERT INTO " . $this->tableName . "
             SET
-                Firstname=:Firstname, Lastname=:Lastname, Address=:Address, Email_Address=:Email_Address, Phone_Number=:Phone_Number, Driver_License_Number=:Driver_License_Number, Province_Of_Issue=:Province_Of_Issue, License_Expiration_Date=:License_Expiration_Date, Card_Number=:Card_Number, Billing_Address=:Billing_Address, Card_Expiration_Date=:Card_Expiration_Date";
+                Firstname=:Firstname, 
+                Lastname=:Lastname, 
+                Address=:Address, 
+                Email_Address=:Email_Address, 
+                Phone_Number=:Phone_Number, 
+                Driver_License_Number=:Driver_License_Number, 
+                Province_Of_Issue=:Province_Of_Issue, 
+                License_Expiration_Date=:License_Expiration_Date, 
+                Card_Number=:Card_Number, 
+                Billing_Address=:Billing_Address, 
+                Card_Expiration_Date=:Card_Expiration_Date";
         if (!empty($this->Vehicle_Make))
             $query .= ", Vehicle_Make=:Vehicle_Make";
         if (!empty($this->Rental_Duration))
@@ -130,10 +140,10 @@ class Customer
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row) {
             // set values to object properties
-            $this->CID = $row['CID'];
             $this->Firstname = $row['Firstname'];
             $this->Lastname = $row['Lastname'];
             $this->Address = $row['Address'];
+            $this->Email_Address = $row['Email_Address'];
             $this->Phone_Number = $row['Phone_Number'];
             $this->Driver_License_Number = $row['Driver_License_Number'];
             $this->Province_Of_Issue = $row['Province_Of_Issue'];
@@ -146,6 +156,73 @@ class Customer
             $this->Pick_Up_Location = $row['Pick_Up_Location'];
             $this->Drop_Off_Location = $row['Drop_Off_Location'];
         }
+    }
+
+    // update customer
+    function update()
+    {
+        // update query
+        $query = "UPDATE " . $this->tableName . "        
+        SET
+            Firstname=:Firstname, 
+            Lastname=:Lastname, 
+            Address=:Address, 
+            Email_Address=:Email_Address, 
+            Phone_Number=:Phone_Number, 
+            Driver_License_Number=:Driver_License_Number, 
+            Province_Of_Issue=:Province_Of_Issue, 
+            License_Expiration_Date=:License_Expiration_Date, 
+            Card_Number=:Card_Number, 
+            Billing_Address=:Billing_Address, 
+            Card_Expiration_Date=:Card_Expiration_Date, 
+            Vehicle_Make=:Vehicle_Make, 
+            Rental_Duration=:Rental_Duration, 
+            Pick_Up_Location=:Pick_Up_Location, 
+            Drop_Off_Location=:Drop_Off_Location
+        WHERE
+            CID = :id";
+
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->Firstname = htmlspecialchars(strip_tags($this->Firstname));
+        $this->Lastname = htmlspecialchars(strip_tags($this->Lastname));
+        $this->Address = htmlspecialchars(strip_tags($this->Address));
+        $this->Email_Address = htmlspecialchars(strip_tags($this->Email_Address));
+        $this->Phone_Number = htmlspecialchars(strip_tags($this->Phone_Number));
+        $this->Driver_License_Number = htmlspecialchars(strip_tags($this->Driver_License_Number));
+        $this->Province_Of_Issue = htmlspecialchars(strip_tags($this->Province_Of_Issue));
+        $this->License_Expiration_Date = htmlspecialchars(strip_tags($this->License_Expiration_Date));
+        $this->Card_Number = htmlspecialchars(strip_tags($this->Card_Number));
+        $this->Billing_Address = htmlspecialchars(strip_tags($this->Billing_Address));
+        $this->Card_Expiration_Date = htmlspecialchars(strip_tags($this->Card_Expiration_Date));
+        $this->Vehicle_Make = htmlspecialchars(strip_tags($this->Vehicle_Make));
+        $this->Rental_Duration = htmlspecialchars(strip_tags($this->Rental_Duration));
+        $this->Pick_Up_Location = htmlspecialchars(strip_tags($this->Pick_Up_Location));
+        $this->Drop_Off_Location = htmlspecialchars(strip_tags($this->Drop_Off_Location));
+
+        // bind values
+        $stmt->bindParam(":Firstname", $this->Firstname);
+        $stmt->bindParam(":Lastname", $this->Lastname);
+        $stmt->bindParam(":Address", $this->Address);
+        $stmt->bindParam(":Email_Address", $this->Email_Address);
+        $stmt->bindParam(":Phone_Number", $this->Phone_Number);
+        $stmt->bindParam(":Driver_License_Number", $this->Driver_License_Number);
+        $stmt->bindParam(":Province_Of_Issue", $this->Province_Of_Issue);
+        $stmt->bindParam(":License_Expiration_Date", $this->License_Expiration_Date);
+        $stmt->bindParam(":Card_Number", $this->Card_Number);
+        $stmt->bindParam(":Billing_Address", $this->Billing_Address);
+        $stmt->bindParam(":Card_Expiration_Date", $this->Card_Expiration_Date);
+        $stmt->bindParam(":Vehicle_Make", $this->Vehicle_Make);
+        $stmt->bindParam(":Rental_Duration", $this->Rental_Duration);
+        $stmt->bindParam(":Pick_Up_Location", $this->Pick_Up_Location);
+        $stmt->bindParam(":Drop_Off_Location", $this->Drop_Off_Location);
+        $stmt->bindParam(":id", $this->CID);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 }
 

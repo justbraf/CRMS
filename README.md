@@ -14,7 +14,7 @@
 - Add a new customer
     - POST Method
     - http://localhost/api/customers/addNew.php
-    - Required POST fields with exact spelling
+    - Required POST fields - exact spelling
         - Firstname
         - Lastname
         - Address
@@ -30,3 +30,27 @@
     - GET Method
     - one parameter: id
     - http://localhost/api/customers/getCustomer.php?id=12345
+- Update a specific customer
+    - Suggest calling a get customer API
+        - to verify the customer exist
+        - to populate the form
+        - and then send the existing data with any updates
+    - POST Method
+    - one parameter: id
+    - Optional POST fields - exact spelling
+        - Firstname
+        - Lastname
+        - Address
+        - Email_Address
+        - Phone_Number
+        - Driver_License_Number
+        - Province_Of_Issue
+        - License_Expiration_Date
+        - Card_Number
+        - Billing_Address
+        - Card_Expiration_Date
+        - Vehicle_Make
+        - Rental_Duration
+        - Pick_Up_Location
+        - Drop_Off_Location
+    - http://localhost/api/customers/update.php?id=12345
