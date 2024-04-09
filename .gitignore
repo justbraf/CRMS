@@ -1,2 +1,3 @@
 /backend/vendor
 /backend/src/test.php
+/backend/.phpunit.result.cache

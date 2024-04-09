@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit colors="true" bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <!-- 
+        <testsuite name="integration">
+            <directory>tests/integration</directory>
+        </testsuite>
+
+        <testsuite name="edge-to-edge">
+            <directory>tests/edge-to-edge</directory>
+        </testsuite> -->
+    </testsuites>
+</phpunit>
