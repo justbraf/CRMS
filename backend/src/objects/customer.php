@@ -224,6 +224,28 @@ class Customer
         }
         return false;
     }
+
+    // delete the product
+    function delete()
+    {
+        // delete query
+        $query = "DELETE FROM " . $this->tableName . " WHERE CID = ?";
+
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->CID = htmlspecialchars(strip_tags($this->CID));
+
+        // bind id of record to delete
+        $stmt->bindParam(1, $this->CID);
+
+        // execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
 }
 
 // ====================================

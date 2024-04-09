@@ -22,29 +22,28 @@ if ($num > 0) {
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
-
+        // return only select fields for searching
         $customerSingle = array(
             "CID" => $CID,
             "Firstname" => $Firstname,
             "Lastname" => $Lastname,
-            "Address" => html_entity_decode($Address),
+            // "Address" => html_entity_decode($Address),
             "Email_Address" => $Email_Address,
             "Phone_Number" => $Phone_Number,
             "Driver_License_Number" => $Driver_License_Number,
-            "Province_Of_Issue" => $Province_Of_Issue,
-            "License_Expiration_Date" => $License_Expiration_Date,
-            "Card_Number" => $Card_Number,
-            "Billing_Address" => $Billing_Address,
-            "Card_Expiration_Date" => $Card_Expiration_Date,
-            "Vehicle_Make" => $Vehicle_Make,
-            "Rental_Duration" => $Rental_Duration,
-            "Pick_Up_Location" => $Pick_Up_Location,
-            "Drop_Off_Location" => $Drop_Off_Location
+            // "Province_Of_Issue" => $Province_Of_Issue,
+            // "License_Expiration_Date" => $License_Expiration_Date,
+            // "Card_Number" => $Card_Number,
+            // "Billing_Address" => $Billing_Address,
+            // "Card_Expiration_Date" => $Card_Expiration_Date,
+            // "Vehicle_Make" => $Vehicle_Make,
+            // "Rental_Duration" => $Rental_Duration,
+            // "Pick_Up_Location" => $Pick_Up_Location,
+            // "Drop_Off_Location" => $Drop_Off_Location
         );
 
         array_push($customers_arr["records"], $customerSingle);
     }
-
     // set response code - 200 OK
     http_response_code(200);
     echo json_encode($customers_arr);

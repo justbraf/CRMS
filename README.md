@@ -11,6 +11,14 @@
 - Get all customers
     - GET Method
     - http://localhost/api/customers/all.php
+    - Returned fields
+        - CID
+        - Firstname
+        - Lastname
+        - Email_Address
+        - Phone_Number
+        - Driver_License_Number
+
 - Add a new customer
     - POST Method
     - http://localhost/api/customers/addNew.php
@@ -26,10 +34,12 @@
         - Card_Number
         - Billing_Address
         - Card_Expiration_Date
+
 - Get a specific customer
     - GET Method
     - one parameter: id
     - http://localhost/api/customers/getCustomer.php?id=12345
+
 - Update a specific customer
     - Suggest calling a get customer API
         - to verify the customer exist
@@ -54,3 +64,8 @@
         - Pick_Up_Location
         - Drop_Off_Location
     - http://localhost/api/customers/update.php?id=12345
+    
+- Delete a specific customer
+    - POST Method
+    - one parameter: id
+    - http://localhost/api/customers/delete.php
