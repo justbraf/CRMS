@@ -12,7 +12,7 @@ $db = $database->getConnection();
 $vehicle = new Vehicle($db);
 
 // query vehicles
-$stmt = $vehicle->read();
+$stmt = $vehicle->getAll();
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
@@ -24,12 +24,14 @@ if ($num > 0) {
         extract($row);
 
         $vehicleSingle = array(
-            "make" => $make,
-            "model" => $model,
-            "colour" => $colour,
-            "plateNumber" => $plateNumber,
-            "rating" => $rating,
-            "availability" => $availability
+            "Make" => $Make,
+            "Model" => $Model,
+            "VID" => $VID,
+            "Color" => $Color,
+            "License_Plate" => $License_Plate,
+            "Odometer_Reading" => $Odometer_Reading,
+            "Rate" => $Rate,
+            "Availability" => $Availability
         );
 
         array_push($vehicles_arr["records"], $vehicleSingle);
