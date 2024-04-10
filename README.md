@@ -11,3 +11,5 @@
 [Customer API routes](customer.md)
 
 [Vehicle API routes](vehicle.md)
+
+[Rental API routes](rental.md)

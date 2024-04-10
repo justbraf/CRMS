@@ -20,7 +20,7 @@ $customer = new Customer($db);
 // set ID property of record to read
 $customer->CID = isset($_GET['id']) ? $_GET['id'] : die();
 
-// read the details of customer to be edited
+// read the details of customer to be fetched
 $customer->getCustomer();
 
 if ($customer->Firstname != null) {

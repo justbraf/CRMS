@@ -20,7 +20,7 @@ $vehicle = new Vehicle($db);
 // set ID property of record to read
 $vehicle->VID = isset($_GET['id']) ? $_GET['id'] : die();
 
-// read the details of vehicle to be edited
+// read the details of vehicle to be fetched
 $vehicle->getvehicle();
 
 if ($vehicle->Make != null) {

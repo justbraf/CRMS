@@ -12,7 +12,7 @@ $db = $database->getConnection();
 $rental = new Rental($db);
 
 // query rentals
-$stmt = $rental->read();
+$stmt = $rental->getAll();
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
@@ -24,15 +24,14 @@ if ($num > 0) {
         extract($row);
 
         $rentalSingle = array(
-            "periodStart" => $periodStart,
-            "periodEnd" => $periodEnd,
-            "rate" => $rate,
-            "additionalFees" => $additionalFees,
-            "status" => $status,
-            "condition" => html_entity_decode($condition),
-            "cardType" => $cardType,
-            "amountOwed" => $amountOwed,
-            "amountPaid" => $amountPaid
+            "RID" => $RID,
+            "CID" => $CID,
+            "VID" => $VID,
+            "Rental_Period_Start" => $Rental_Period_Start,
+            "Rental_Period_End" => $Rental_Period_End,
+            "Additional_Fees" => $Additional_Fees,
+            "Status" => html_entity_decode($Status),
+            "Condition" => html_entity_decode($Condition)
         );
 
         array_push($rentals_arr["records"], $rentalSingle);
