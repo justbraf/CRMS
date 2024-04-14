@@ -34,7 +34,7 @@ $db = $database->getConnection();
 $rental = new Rental($db);
 
 // set ID property of record to read
-$rental->VID = isset($_GET['id']) ? $_GET['id'] : die();
+$rental->RID = isset($_GET['id']) ? $_GET['id'] : die();
 
 // read the details of rental to be fetched
 $rental->getRental();

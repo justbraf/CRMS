@@ -25,7 +25,30 @@ class Rental
     // read all rentals
     function getAll()
     {
-        $query = "SELECT * FROM " . $this->tableName;
+        // $query = "SELECT * FROM " . $this->tableName;
+        $query = "SELECT 
+            rar.RID, 
+            rar.CID, 
+            rar.VID, 
+            CONCAT(cust.Lastname, \", \", cust.Firstname) AS Name, 
+            DATEDIFF(rar.Rental_Period_End, rar.Rental_Period_Start) As Num_Days, 
+            (DATEDIFF(rar.Rental_Period_End, rar.Rental_Period_Start) * veh.Rate + rar.Additional_Fees) As Rental_Cost, 
+            veh.Make, 
+            veh.Model, 
+            veh.Color, 
+            veh.License_Plate, 
+            rar.Rental_Period_Start, 
+            rar.Rental_Period_End, 
+            rar.Additional_Fees, 
+            rar.Status, 
+            rar.Vehicle_Condition
+        FROM " . $this->tableName . " AS rar 
+        LEFT JOIN customers AS cust 
+            ON rar.CID = cust.CID
+        LEFT JOIN vehicles As veh
+            ON rar.VID = veh.VID
+        ORDER BY Name";
+
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
