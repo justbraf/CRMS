@@ -15,7 +15,7 @@
         - Rental_Period_End
         - Additional_Fees
         - Status
-        - Condition
+        - Vehicle_Condition
 
 - Add a new rental
     - POST Method
@@ -27,7 +27,7 @@
         - Rental_Period_End
         - Additional_Fees
         - Status
-        - Condition
+        - Vehicle_Condition
         
 - Get a specific rental
     - GET Method
@@ -48,7 +48,7 @@
         - Rental_Period_End
         - Additional_Fees
         - Status
-        - Condition
+        - Vehicle_Condition
     - http://localhost/api/rentals/update.php
     
 - Delete a specific rental

@@ -14,7 +14,7 @@ class Rental
     public $Rental_Period_End;
     public $Additional_Fees;
     public $Status;
-    public $Condition;
+    public $Vehicle_Condition;
 
     // constructor with $db as database connection
     public function __construct($db)
@@ -62,7 +62,7 @@ class Rental
             $this->Rental_Period_End = $row['Rental_Period_End'];
             $this->Additional_Fees = $row['Additional_Fees'];
             $this->Status = $row['Status'];
-            $this->Condition = $row['Condition'];
+            $this->Vehicle_Condition = $row['Vehicle_Condition'];
         }
     }
 
@@ -77,7 +77,7 @@ class Rental
                 Rental_Period_End=:Rental_Period_End,
                 Additional_Fees=:Additional_Fees,
                 Status=:Status,
-                Condition=:Condition";
+                Vehicle_Condition=:Vehicle_Condition";
 
         $stmt = $this->conn->prepare($query);
 
@@ -88,7 +88,7 @@ class Rental
         $this->Rental_Period_End = htmlspecialchars(strip_tags($this->Rental_Period_End));
         $this->Additional_Fees = htmlspecialchars(strip_tags($this->Additional_Fees));
         $this->Status = htmlspecialchars(strip_tags($this->Status));
-        $this->Condition = htmlspecialchars(strip_tags($this->Condition));
+        $this->Vehicle_Condition = htmlspecialchars(strip_tags($this->Vehicle_Condition));
 
         // bind values
         $stmt->bindParam(":CID", $this->CID);
@@ -97,7 +97,7 @@ class Rental
         $stmt->bindParam(":Rental_Period_End", $this->Rental_Period_End);
         $stmt->bindParam(":Additional_Fees", $this->Additional_Fees);
         $stmt->bindParam(":Status", $this->Status);
-        $stmt->bindParam(":Condition", $this->Condition);
+        $stmt->bindParam(":Vehicle_Condition", $this->Vehicle_Condition);
 
         if ($stmt->execute()) {
             return true;
@@ -117,9 +117,9 @@ class Rental
                 Rental_Period_End=:Rental_Period_End, 
                 Additional_Fees=:Additional_Fees, 
                 Status=:Status, 
-                Condition=:Condition
+                Vehicle_Condition=:Vehicle_Condition
             WHERE
-                RID = :id";
+                RID=:id";
 
         $stmt = $this->conn->prepare($query);
 
@@ -130,7 +130,7 @@ class Rental
         $this->Rental_Period_End = htmlspecialchars(strip_tags($this->Rental_Period_End));
         $this->Additional_Fees = htmlspecialchars(strip_tags($this->Additional_Fees));
         $this->Status = htmlspecialchars(strip_tags($this->Status));
-        $this->Condition = htmlspecialchars(strip_tags($this->Condition));
+        $this->Vehicle_Condition = htmlspecialchars(strip_tags($this->Vehicle_Condition));
 
         // bind values
         $stmt->bindParam(":CID", $this->CID);
@@ -139,7 +139,7 @@ class Rental
         $stmt->bindParam(":Rental_Period_End", $this->Rental_Period_End);
         $stmt->bindParam(":Additional_Fees", $this->Additional_Fees);
         $stmt->bindParam(":Status", $this->Status);
-        $stmt->bindParam(":Condition", $this->Condition);
+        $stmt->bindParam(":Vehicle_Condition", $this->Vehicle_Condition);
         $stmt->bindParam(":id", $this->RID);
 
         if ($stmt->execute()) {

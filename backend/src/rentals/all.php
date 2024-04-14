@@ -1,6 +1,26 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
+// Allow from any origin
+if (isset($_SERVER["HTTP_ORIGIN"])) {
+    // You can decide if the origin in $_SERVER['HTTP_ORIGIN'] is something you want to allow, or as we do here, just allow all
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+} else {
+    //No HTTP_ORIGIN set, so we allow any. You can disallow if needed here
+    header("Access-Control-Allow-Origin: *");
+}
+
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Max-Age: 600");    // cache for 10 minutes
+
+if ($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
+    if (isset($_SERVER["HTTP_ACCESS_CONTROL_REQUEST_METHOD"]))
+        header("Access-Control-Allow-Methods: GET"); //Make sure you remove those you do not want to support
+
+    if (isset($_SERVER["HTTP_ACCESS_CONTROL_REQUEST_HEADERS"]))
+        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+
+    //Just exit with 200 OK with the above headers for OPTIONS method
+    exit(0);
+}
 
 include_once '../config/database.php';
 include_once '../objects/rental.php';
@@ -31,7 +51,7 @@ if ($num > 0) {
             "Rental_Period_End" => $Rental_Period_End,
             "Additional_Fees" => $Additional_Fees,
             "Status" => html_entity_decode($Status),
-            "Condition" => html_entity_decode($Condition)
+            "Vehicle_Condition" => html_entity_decode($Vehicle_Condition)
         );
 
         array_push($rentals_arr["records"], $rentalSingle);
