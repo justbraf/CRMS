@@ -102,8 +102,8 @@ CREATE TABLE `rentalsandreturns` (
   `Rental_Period_Start` date NOT NULL,
   `Rental_Period_End` date NOT NULL,
   `Additional_Fees` decimal(15,2) NOT NULL DEFAULT 0.00,
-  `Status` varchar(25) NOT NULL,
-  `Condition` varchar(25) NOT NULL
+  `Status` varchar(160) NOT NULL,
+  `Vehicle_Condition` varchar(160) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
