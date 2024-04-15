@@ -24,46 +24,44 @@ if ($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
 
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/rental.php';
+include_once '../objects/payment.php';
 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
 
-// prepare rental object
-$rental = new Rental($db);
+// prepare payment object
+$payment = new Payment($db);
 
 // set ID property of record to read
-$rental->RID = isset($_GET['id']) ? $_GET['id'] : die();
+$payment->CID = isset($_GET['cid']) ? $_GET['cid'] : die();
+$payment->RID = isset($_GET['rid']) ? $_GET['rid'] : die();
 
-// read the details of rental to be fetched
-$rental->getRental();
+// read the details of payment to be fetched
+$payment->getPayments();
 
-if ($rental->CID != null) {
+if ($payment->CID != null) {
     // create array
-    $rental_arr = array(
-        "RID" => $rental->RID,
-        "CID" => $rental->CID,
-        "VID" => $rental->VID,
-        "Name" => $rental->Name,
-        "Num_Days" => $rental->Num_Days,
-        "Rental_Cost" => $rental->Rental_Cost,
-        "Make" => $rental->Make,
-        "Model" => $rental->Model,
-        "Color" => $rental->Color,
-        "License_Plate" => $rental->License_Plate,
-        "Rental_Period_Start" => $rental->Rental_Period_Start,
-        "Rental_Period_End" => $rental->Rental_Period_End,
-        "Additional_Fees" => $rental->Additional_Fees,
-        "Status" => html_entity_decode($rental->Status),
-        "Vehicle_Condition" => html_entity_decode($rental->Vehicle_Condition)
-    );
+    $payments_arr = array();
+    $payments_arr["records"] = array();
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+        $paymentSingle = array(
+            "CID" => $payment->CID,
+            "RID" => $payment->RID,
+            "Card_Type" => $payment->Card_Type,
+            "Amount_Paid" => $payment->Amount_Paid
+        );
+
+        array_push($payments_arr["records"], $paymentSingle);
+    }
 
     // set response code - 200 OK
     http_response_code(200);
-    echo json_encode($rental_arr);
+    echo json_encode($payments_arr);
 } else {
     // set response code - 404 Not found
     http_response_code(404);
-    echo json_encode(array("message" => "rental does not exist."));
+    echo json_encode(array("message" => "payment does not exist."));
 }

@@ -33,7 +33,10 @@ class Customer
     // read all customers
     function getAll()
     {
-        $query = "SELECT * FROM " . $this->tableName;
+        $query = "SELECT * FROM " . $this->tableName . "
+        ORDER BY 
+            Lastname";
+
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
@@ -247,14 +250,3 @@ class Customer
         return false;
     }
 }
-
-// ====================================
-// $query = "SELECT * 
-//     FROM
-//         " . $this->tableName;
-//      . " p
-//     LEFT JOIN
-//         categories c
-//             ON p.category_id = c.id
-// ORDER BY
-//     p.created DESC";
